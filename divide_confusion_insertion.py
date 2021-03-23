@@ -70,8 +70,8 @@ class Confusing_insertion():
     def single_te_diff_strand(self):
         '''对于第四列只有一种transposon，但是插入方向不同的insertion，进行拆分，修改第四列，并且调用single_te_same_strand方法'''
         te = list(self.ins_dic.keys())[0]
-        self.ins_dic[te]["+"][0] = "(" + "_".join(self.ins_list[:3]) + ")" + self.ins_dic[te]["+"][0] #第四列信息的修改
-        self.ins_dic[te]["-"][0] = "(" + "_".join(self.ins_list[:3]) + ")" + self.ins_dic[te]["-"][0]
+        self.ins_dic[te]["+"][0] = "(" + "_".join(self.ins_list[:3]) + "(" + self.ins_dic[te]["+"][0] #第四列信息的修改
+        self.ins_dic[te]["-"][0] = "(" + "_".join(self.ins_list[:3]) + "(" + self.ins_dic[te]["-"][0]
 
         sense_dic = {te:{}}; anti_dic = {te:{}} #拆分正链和负链上的插入片段，并且各自构建修改后的"字典-字典-元组"嵌套结构，各自调用single_te_same_strand方法进行输出
         sense_dic[te]["+"] = self.ins_dic[te]["+"]; sense_dic[te]["-"] = []
