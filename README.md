@@ -2,12 +2,13 @@
 
 ## How to filter out somatic insertions from TEMP2 result?
 ### Step1: Dividing confused insertions
-`divide_confused_insertion.sh`
-`        -b <beds>       transposon insertions in BED format`
-`        -h      Show this information`
+```
+divide_confused_insertion.sh
+        -b <beds>       transposon insertions in BED format
+        -h      Show this information
 
-`/data/tusers/zhongrenhu/for_TE_and_sSNV/bin/divide_confused_insertion.sh -b "UMB4638/*/*.insertion.bed`
-
+/data/tusers/zhongrenhu/for_TE_and_sSNV/bin/divide_confused_insertion.sh -b "UMB4638/*/*.insertion.bed
+```
 ### Step2: Creating reference insertion
 `merge_multi_insertion.sh
         -b <bed(s)>     Insertion files in BED format
