@@ -40,4 +40,4 @@ done
 rm *tmp*
 
 
-#nohup ../../../bin/merge_multi_insertion.sh -p UMB1465 -b "UMB1465/SRR12646*/*.insertion.bed*" &
+#nohup ../../../bin/merge_multi_insertion.sh -p UMB4638 -b "UMB4638/*/*.insertion.bed*" &

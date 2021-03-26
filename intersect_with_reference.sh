@@ -57,8 +57,7 @@ do
     done
 done
 
-rm *tmp*
 rm ${query_a%/}/*tmp*
 rm ${query_a%/}/*/*tmp*
 
-#nohup ../../../bin/intersect_with_reference.sh -a UMB1465/ -b "UMB1465/SRR*/*.insertion.bed" -p UMB1465 &
+#nohup ../../../bin/intersect_with_reference.sh -a UMB4638/ -b "UMB4638/*/*.insertion.bed" -p UMB4638 &

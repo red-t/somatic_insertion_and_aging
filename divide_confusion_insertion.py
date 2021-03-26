@@ -128,6 +128,7 @@ def main(argv):
                 confusing_ins.single_te_mode()    
         of.close()
 
+
 #argv[0]是脚本的名字，获取参数时，一般不考虑argv[0]
 if __name__ == "__main__":
    main(sys.argv[1:])
