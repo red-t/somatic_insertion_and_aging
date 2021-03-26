@@ -1,6 +1,10 @@
 import sys, getopt, re, copy
 
 def make_tag_dic(input_file):
+    '''
+    初始化一个"字典-列表"嵌套结构：
+    字典的key是截取出的"confused insertion mark"
+    '''
     confused_tags = {}
     with open(input_file, "r") as in_f:
         for tag in in_f:
@@ -10,6 +14,11 @@ def make_tag_dic(input_file):
     return confused_tags
 
 def collect_insertion(input_file, confused_tags):
+    '''
+    confused_tags为"make_tag_dic"初始化出来的空字典。对于空字典中的每一个mark，添加包
+    含这个mark的"combined insertion"，这个"combined insertion"的形式是一个列表，最终
+    返回的，是一个"字典-列表-列表"嵌套结构
+    '''
     with open(input_file, "r") as in_f:
         for l in in_f:
             l=l.strip()
@@ -20,6 +29,14 @@ def collect_insertion(input_file, confused_tags):
     return confused_tags
 
 def output_confident_insertion(output_file, confused_insertions):
+    '''
+    confused_insertions为函数collect_insertion返回的"字典-列表-列表"嵌套结构。对于每
+    一个"confused insertion mark"对应的"combined insertion"(可能是1个，也可能是2个)，
+    如果对应2个insertion，分别计算这两个insertion的"share counts"。根据"share counts"
+    的大小来判断保留哪一个insertion，并且输出。
+
+    如果"share counts"相同，则根据其大小来"合并"、"丢弃"或"保留"
+    '''
     for tag in confused_insertions:
         if(len(confused_insertions[tag]) == 2):
             sample_counts = len(confused_insertions[tag][0]) - 1
@@ -32,7 +49,7 @@ def output_confident_insertion(output_file, confused_insertions):
                 confused_insertions[tag].remove(confused_insertions[tag][0])
             if(share_counts_1 == share_counts_2):
                 if(share_counts_1 == 1):
-                    confused_insertions[tag][0][0] = confused_insertions[tag][0][0][:-1] + "."
+                    confused_insertions[tag][0][0] = confused_insertions[tag][0][0][:-1] + "." #合并时修改第一列的插入链的方向
                     confused_insertions[tag].remove(confused_insertions[tag][1])
                 if(share_counts_1 >= sample_counts/2):
                     next
