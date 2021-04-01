@@ -33,9 +33,11 @@ for TE in LINE1 ALU SVA
 do
     ##对于每种transposon，根据reference insertion，将所有样本的"uniq-intersect"记录合并起来，构建一个matrix，行表示insertion，列表示sample。以便后续筛选
     cut -f 1 ${directory%/}/${bulk}/${bulk}_x_${prefix}.${TE}.bed > ${directory%/}/${prefix}.${TE}.combined_result #把bulk sample的第一列(也就是reference的那一列)拿出来，以便后续的合并
+    header='reference'
     
     for i in ${directory%/}/*/*_x_${prefix}.${TE}.bed
     do
+        id=`basename ${i}`; id=${id%%_*}; header=${header}"\t"${id}
         join -t $'\t' ${directory%/}/${prefix}.${TE}.combined_result ${i} > ${directory%/}/tmp #通过join进行合并，并用制表符"\t"分隔
         mv ${directory%/}/tmp ${directory%/}/${prefix}.${TE}.combined_result
     done
@@ -49,6 +51,7 @@ do
     grep -v -P '_[0-9]+_[0-9]+_[0-9]+_' ${directory%/}/${prefix}.${TE}.combined_filtered_result | sort -u > ${directory%/}/${prefix}.${TE}.tmp.confident_result #根据特定的pattern筛选出"confident insertion"
     python /data/tusers/zhongrenhu/for_TE_and_sSNV/bin/filter_confused_insertion.py -i ${directory%/}/${prefix}.${TE}.combined_filtered_result -t ${directory%/}/${prefix}.${TE}.tmp.confused_results -o ${directory%/}/${prefix}.${TE}.tmp.filtered.confused_result
     cat ${directory%/}/${prefix}.${TE}.tmp.confident_result ${directory%/}/${prefix}.${TE}.tmp.filtered.confused_result | sort -u > ${directory%/}/${prefix}.${TE}.combined_filtered_result
+    sed -i 1i"${header}" ${directory%/}/${prefix}.${TE}.combined_filtered_result
     rm ${directory%/}/*tmp*
 done
 
