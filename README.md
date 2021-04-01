@@ -7,7 +7,7 @@ divide_confused_insertion.sh
         -b <beds>       transposon insertions in BED format
         -h      Show this information
 
-/data/tusers/zhongrenhu/for_TE_and_sSNV/bin/divide_confused_insertion.sh -b "UMB4638/*/*.insertion.bed
+/data/tusers/zhongrenhu/for_TE_and_sSNV/bin/divide_confused_insertion.sh -b "UMB4638/*/*.insertion.bed"
 ```
 
 ### Step2: Creating reference insertion
