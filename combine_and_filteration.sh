@@ -32,7 +32,7 @@ done
 for TE in LINE1 ALU SVA
 do
     ##对于每种transposon，根据reference insertion，将所有样本的"uniq-intersect"记录合并起来，构建一个matrix，行表示insertion，列表示sample。以便后续筛选
-    cut -f 1 ${directory%/}/${bulk}/${bulk}_x_${prefix}.${TE}.bed > ${directory%/}/${prefix}.${TE}.combined_result #把bulk sample的第一列(也就是reference的那一列)拿出来，以便后续的合并
+    cut -f 1 ${directory%/}/${bulk}*/${bulk}_x_${prefix}.${TE}.bed > ${directory%/}/${prefix}.${TE}.combined_result #把bulk sample的第一列(也就是reference的那一列)拿出来，以便后续的合并
     header='reference'
     
     for i in ${directory%/}/*/*_x_${prefix}.${TE}.bed
