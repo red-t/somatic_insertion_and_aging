@@ -41,6 +41,7 @@ do
         cut -f 1 ${outdir}/${id}_x_${prefix}.${TE}.tmp.bed | uniq -c | awk '{if($1>1){print $2}}' >> ${query_a%/}/${prefix}.${TE}.reference.multi_intersected.bed #对于每个sample的intersect结果，通过第一列的重复情况确认被"multi-intersected"的"reference insertion"，把所有sample中，同一transposon的"multi-intersected reference"合在一起
         rm query_b.${TE}.tmp.bed && rm query_b.${TE}.tmp1.bed
     done
+    echo "the_lowest_control" >> ${query_a%/}/${prefix}.${TE}.reference.multi_intersected.bed
 done
 
 
